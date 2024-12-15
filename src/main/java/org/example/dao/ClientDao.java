@@ -14,7 +14,6 @@ import java.util.List;
 
 public class ClientDao {
 
-    //TESTED
     public static void createClient(CreateClientDto createClientDto) {
         try(Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
@@ -95,8 +94,8 @@ public class ClientDao {
         BigDecimal debt = getClientDebt(clientId);
 
         return debt == BigDecimal.ZERO
-                ? "Client with id=" + clientId + "has NO debt."
-                : "Client with id=" + clientId + "has" + debt + "leva debt.";
+                ? "Client with id=" + clientId + " has NO debt."
+                : "Client with id=" + clientId + " has " + debt + " leva debt.";
     }
 
     public static void updateClientName(UpdateClientDto updateClientDto) {
@@ -117,7 +116,7 @@ public class ClientDao {
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
             session.createQuery(
-                            "UPDATE Client c " +
+                            "UPDATE client c " +
                                     "SET c.debt = c.debt + :newDebt " +
                                     "WHERE c.id = :id " +
                                     "AND c.deletedAt IS NULL")
@@ -132,7 +131,7 @@ public class ClientDao {
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
             session.createQuery(
-                            "UPDATE Client c " +
+                            "UPDATE client c " +
                                     "SET c.name = :newName, " +
                                     "c.debt = c.debt + :additionalDebt " +
                                     "WHERE c.id = :id " +
@@ -149,7 +148,7 @@ public class ClientDao {
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
             session.createQuery(
-                            "UPDATE Client c " +
+                            "UPDATE client c " +
                                     "SET c.debt = c.debt - :newDebt " +
                                     "WHERE c.id = :id " +
                                     "AND c.deletedAt IS NULL")
@@ -174,7 +173,7 @@ public class ClientDao {
         }
     }
 
-    public static void hardDeleteCompany(Client client) {
+    public static void hardDeleteClient(Client client) {
         try(Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
             session.delete(client);

@@ -130,7 +130,7 @@ public class VehicleDao {
         }
     }
 
-    public static void hardDeleteCompany(Vehicle vehicle) {
+    public static void hardDeleteVehicle(Vehicle vehicle) {
         try(Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
             session.delete(vehicle);

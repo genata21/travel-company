@@ -3,6 +3,9 @@ package org.example.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.PositiveOrZero;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -11,12 +14,16 @@ import java.util.Set;
 @Entity(name = "company")
 public class Company extends BaseEntity {
 
+    @NotBlank(message = "Company must have a name.")
+    @Pattern(regexp = "^[A-Z].*", message = "Company name must start with a capital letter.")
     @Column(name = "name", nullable = false)
     private String name;
 
+    @NotBlank(message = "Company description cannot be empty.")
     @Column(name = "description", nullable = false)
     private String description;
 
+    @PositiveOrZero(message = "Profit must not be negative number")
     @Column(name = "profit", nullable = true)
     private BigDecimal profit;
 

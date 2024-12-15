@@ -1,18 +1,24 @@
 package org.example.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PositiveOrZero;
+
 import java.time.LocalDate;
 
 @MappedSuperclass
 public class BaseEntity {
 
+    @PositiveOrZero(message = "ID must not be negative number")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotBlank(message = "Date cannot be empty.")
     @Column(name = "created_at", nullable = false)
     private LocalDate createdAt;
 
+    @NotBlank(message = "Date cannot be empty.")
     @Column(name = "deleted_at")
     private LocalDate deletedAt;
 

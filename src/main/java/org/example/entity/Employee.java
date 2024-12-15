@@ -1,6 +1,8 @@
 package org.example.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import org.example.enums.Category;
 
 import java.time.LocalDate;
@@ -9,9 +11,12 @@ import java.util.Set;
 @Entity(name = "employee")
 public class Employee extends BaseEntity {
 
+    @NotBlank(message = "Employee must have a name.")
+    @Pattern(regexp = "^[A-Z].*", message = "Employee name must start with a capital letter.")
     @Column(name = "name", nullable = false)
     private String name;
 
+    @NotBlank(message = "Category cannot be empty.")
     @Enumerated(EnumType.STRING)
     @Column(name = "category", nullable = false)
     private Category category;

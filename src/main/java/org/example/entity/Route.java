@@ -1,6 +1,9 @@
 package org.example.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.PositiveOrZero;
 import org.example.enums.CargoType;
 
 import java.math.BigDecimal;
@@ -9,28 +12,36 @@ import java.time.LocalDate;
 @Entity(name = "route")
 public class Route extends BaseEntity {
 
+    @NotBlank(message = "Starting point cannot be empty.")
     @Column(name = "starting_point", nullable = false)
     private String startingPoint;
 
+    @NotBlank(message = "Destination cannot be empty.")
     @Column(name = "destination", nullable = false)
     private String destination;
 
+    @NotBlank(message = "Date cannot be empty.")
     @Column(name = "start_date", nullable = false)
     private LocalDate startDate;
 
+    @NotBlank(message = "Date cannot be empty.")
     @Column(name = "delivery_date", nullable = false)
     private LocalDate deliveryDate;
 
+    @NotBlank(message = "Cargo type cannot be empty.")
     @Enumerated(EnumType.STRING)
     @Column(name = "cargo_type", nullable = false)
     private CargoType cargoType;
 
+    @NotBlank(message = "Paid cannot be empty.")
     @Column(name = "is_paid", nullable = false)
     private boolean isPaid;
 
+    @PositiveOrZero(message = "Cost must not be negative number")
     @Column(name = "cost", nullable = false)
     private BigDecimal cost;
 
+    @PositiveOrZero(message = "Weight must not be negative number")
     @Column(name = "weight", nullable = true)
     private BigDecimal weight;
 
