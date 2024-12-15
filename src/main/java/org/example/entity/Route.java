@@ -1,9 +1,7 @@
 package org.example.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.*;
 import org.example.enums.CargoType;
 
 import java.math.BigDecimal;
@@ -24,7 +22,8 @@ public class Route extends BaseEntity {
     @Column(name = "start_date", nullable = false)
     private LocalDate startDate;
 
-    @NotBlank(message = "Date cannot be empty.")
+    @NotEmpty(message = "Date cannot be empty.")
+    @FutureOrPresent(message = "Date cannot be in the past.")
     @Column(name = "delivery_date", nullable = false)
     private LocalDate deliveryDate;
 
