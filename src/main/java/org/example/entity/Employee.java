@@ -3,8 +3,10 @@ package org.example.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Positive;
 import org.example.enums.Category;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -21,6 +23,10 @@ public class Employee extends BaseEntity {
     @Column(name = "category", nullable = false)
     private Category category;
 
+    @Positive(message = "Salary can't be zero or negative.")
+    @Column(name = "salary", nullable = false)
+    private BigDecimal salary;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Company company;
 
@@ -31,9 +37,10 @@ public class Employee extends BaseEntity {
     public Employee() {
     }
 
-    public Employee(long id, LocalDate createdAt, String name, Category category, Company company) {
+    public Employee(long id, LocalDate createdAt, String name, Category category, BigDecimal salary, Company company) {
         super(id, createdAt);
         this.name = name;
+        this.salary = salary;
         this.category = category;
         this.company = company;
     }
@@ -43,6 +50,7 @@ public class Employee extends BaseEntity {
     public Category getCategory() { return category; }
     public Company getCompany() { return company; }
     public Set<Route> getRoutes() { return routes; }
+    public BigDecimal getSalary() { return salary; }
 
     //Setters
     public void setName(String name) {
@@ -54,6 +62,7 @@ public class Employee extends BaseEntity {
     public void setCompany(Company company) {
         this.company = company;
     }
+    public void setSalary(BigDecimal salary) {this.salary = salary;}
 
     //Methods
     @Override
@@ -61,6 +70,7 @@ public class Employee extends BaseEntity {
         return "Employee{" +
                 "name='" + name + '\'' +
                 ", category=" + category +
+                ", salary=" + salary +
                 ", company=" + company +
                 '}';
     }

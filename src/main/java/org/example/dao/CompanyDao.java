@@ -12,6 +12,7 @@ import org.hibernate.Transaction;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+
 public class CompanyDao {
     public static void createCompany(CreateCompanyDto createCompanyDto) {
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
@@ -46,6 +47,7 @@ public class CompanyDao {
         }
         return companies;
     }
+
     public static List<Employee> getAllEmployeesInCompany(long companyId) {
         List<Employee> employees;
         try(Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
@@ -121,7 +123,7 @@ public class CompanyDao {
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
             session.createQuery(
-                            "UPDATE Company c " +
+                            "UPDATE company c " +
                                     "SET c.profit = c.profit + :newProfit " +
                                     "WHERE c.id = :companyId " +
                                     "AND c.deletedAt IS NULL")
@@ -131,11 +133,12 @@ public class CompanyDao {
             transaction.commit();
         }
     }
+
     public static void updateCompany(UpdateCompanyDto updateCompanyDto) {
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
             session.createQuery(
-                            "UPDATE Company c " +
+                            "UPDATE company c " +
                                     "SET c.name = :newName, " +
                                     "c.description = :newDescription, " +
                                     "c.profit = c.profit + :newProfit " +

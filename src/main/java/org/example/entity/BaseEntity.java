@@ -11,13 +11,13 @@ import java.time.LocalDate;
 @MappedSuperclass
 public class BaseEntity {
 
-    @Positive(message = "ID must not be negative number")
     @Id
+    @Positive(message = "Id must be positive number")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotEmpty(message = "Date cannot be empty.")
-    @PastOrPresent(message = "Date cannot be in future.")
+    @PastOrPresent(message = "Creation date can't be in the future")
     @Column(name = "created_at", nullable = false)
     private LocalDate createdAt;
 
