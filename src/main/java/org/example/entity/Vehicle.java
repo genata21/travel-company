@@ -29,6 +29,12 @@ public class Vehicle extends BaseEntity {
     public Vehicle() {
     }
 
+    public Vehicle(String plate, VehicleType vehicleType, Company company) {
+        this.plate = plate;
+        this.vehicleType = vehicleType;
+        this.company = company;
+    }
+
     public Vehicle(long id, LocalDate createdAt, String plate, VehicleType vehicleType, Company company) {
         super(id, createdAt);
         this.plate = plate;
