@@ -4,6 +4,8 @@ import org.example.configuration.SessionFactoryUtil;
 import org.example.dao.ClientDao;
 import org.example.dao.VehicleDao;
 import org.example.dto.Client.CreateClientDto;
+import org.example.dto.Company.CreateCompanyDto;
+import org.example.dto.Company.UpdateCompanyDto;
 import org.example.dto.Vehicle.CreateVehicleDto;
 import org.example.dto.Vehicle.UpdateVehicleDto;
 import org.example.entity.Client;
@@ -13,6 +15,7 @@ import org.example.entity.Vehicle;
 import org.example.enums.VehicleType;
 import org.hibernate.HibernateException;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -51,5 +54,10 @@ public class Main {
 //        Client client = ClientDao.getClientById(1);
 //        System.out.println(client);
         //END TESTING CLIENT
+
+        CreateCompanyDto newComp = new CreateCompanyDto("enigma", "hotels");
+        CreateCompanyDto newComp2 = new CreateCompanyDto("lidl", "foods", BigDecimal.ONE);
+
+        System.out.println(newComp);
     }
 }
