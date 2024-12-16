@@ -23,7 +23,10 @@ public class EmployeeDao {
 
             Employee employee = new Employee();
             employee.setName(createEmployeeDto.getName());
-            employee.setCategory((createEmployeeDto.getCategory()));
+            employee.setSalary(createEmployeeDto.getSalary());
+            employee.setCompany(createEmployeeDto.getCompany());
+            employee.setCategory(createEmployeeDto.getCategory());
+            employee.setCreatedAt(createEmployeeDto.getCompany().getCreatedAt());
             session.save(employee);
 
             transaction.commit();
@@ -34,7 +37,13 @@ public class EmployeeDao {
         Employee employee;
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
-            employee = session.get(Employee.class, employeeId);
+            employee = session.createQuery(
+                            "SELECT e FROM employee e " +
+                                    "join fetch e.company " +
+                                    "WHERE e.id = :employeeId " +
+                                    "AND e.deletedAt IS NULL", Employee.class)
+                    .setParameter("employeeId", employeeId)
+                    .getSingleResult();
             transaction.commit();
         }
         return employee;

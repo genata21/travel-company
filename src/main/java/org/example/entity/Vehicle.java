@@ -2,6 +2,7 @@ package org.example.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.example.enums.VehicleType;
 
 import java.time.LocalDate;
@@ -14,11 +15,12 @@ public class Vehicle extends BaseEntity {
     @Column(name = "plate", nullable = false)
     private String plate;
 
-    @NotBlank(message = "Vehicle type cannot be empty.")
+    @NotNull(message = "Vehicle type cannot be empty.")
     @Enumerated(EnumType.STRING)
     @Column(name = "vehicle_type", nullable = false)
     private VehicleType vehicleType;
 
+    @NotNull(message = "Vehicle type cannot be empty.")
     @ManyToOne(fetch = FetchType.LAZY)
     private Company company;
 

@@ -12,7 +12,6 @@ import java.time.LocalDate;
 public class BaseEntity {
 
     @Id
-    @Positive(message = "Id must be positive number")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 

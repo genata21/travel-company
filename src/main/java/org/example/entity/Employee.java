@@ -2,6 +2,7 @@ package org.example.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 import org.example.enums.Category;
@@ -24,6 +25,7 @@ public class Employee extends BaseEntity {
     private Category category;
 
     @Positive(message = "Salary can't be zero or negative.")
+    @NotNull(message = "Salary cannot be empty.")
     @Column(name = "salary", nullable = false)
     private BigDecimal salary;
 

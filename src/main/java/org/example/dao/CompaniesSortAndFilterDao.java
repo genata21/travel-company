@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import java.math.BigDecimal;
 import java.util.List;
+
 public class CompaniesSortAndFilterDao {
     public static List<Company> sortCompaniesAlphabetically() {
         List<Company> companies;
@@ -24,6 +25,7 @@ public class CompaniesSortAndFilterDao {
         }
         return companies;
     }
+
     public static List<Company> sortCompaniesByProfit(SortTypes sort) {
         List<Company> companies;
         try(Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
@@ -41,6 +43,7 @@ public class CompaniesSortAndFilterDao {
         }
         return companies;
     }
+
     public static List<Company> sortCompaniesByProfitAlphabetically(SortTypes sort) {
         List<Company> companies;
         try(Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
@@ -58,6 +61,7 @@ public class CompaniesSortAndFilterDao {
         }
         return companies;
     }
+
     public static List<Company> showCompaniesWithProfitGreaterThan(BigDecimal profit) {
         List<Company> companies;
         try(Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
@@ -76,6 +80,7 @@ public class CompaniesSortAndFilterDao {
         }
         return companies;
     }
+
     public static List<Company> showCompaniesWithProfitLessThan(BigDecimal profit) {
         List<Company> companies;
         try(Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
@@ -94,9 +99,11 @@ public class CompaniesSortAndFilterDao {
         }
         return companies;
     }
+
     public static List<Company> showCompaniesWithProfit() {
         return showCompaniesWithProfitGreaterThan(BigDecimal.ZERO);
     }
+    
     public static List<Company> filterCompaniesByName(String nameSubstring) {
         List<Company> companies;
         try(Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
