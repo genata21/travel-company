@@ -12,7 +12,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class ClientDaoTest {
+
     private List<String> validate(Client client) {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
@@ -21,27 +23,27 @@ public class ClientDaoTest {
                 .map(ConstraintViolation::getMessage)
                 .collect(Collectors.toList());
     }
+
     @Test
     public void whenInvalidClientName_firstLetterNotCapital_thenAssertConstraintViolation() {
         Client client = new Client(1, LocalDate.now(), "client");
         List<String> messages = validate(client);
-        System.out.println(messages);
         assertEquals(1,messages.size());
         assertTrue(messages.contains("Client name must start with a capital letter."));
     }
+
     @Test
     public void whenInvalidClientName_nameMissing_thenAssertConstraintViolation() {
         Client client = new Client(1, LocalDate.now());
         List<String> messages = validate(client);
-        System.out.println(messages);
         assertEquals(1,messages.size());
         assertTrue(messages.contains("Client must have a name."));
     }
+
     @Test
     public void whenDebtIsNegative_thenAssertConstraintViolation() {
         Client client = new Client(1, LocalDate.now(), "Client", BigDecimal.valueOf(-500));
         List<String> messages = validate(client);
-        System.out.println(messages);
         assertEquals(1,messages.size());
         assertTrue(messages.contains("Debt can't be negative number"));
     }

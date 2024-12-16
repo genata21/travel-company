@@ -23,11 +23,10 @@ public class CreateRouteDto {
     @Future(message = "Delivery date must be in the future.")
     private LocalDate deliveryDate;
 
-    @NotBlank(message = "Cargo type cannot be empty.")
-    @Enumerated(EnumType.STRING)
+    @NotNull(message = "Cargo type cannot be empty.")
     private CargoType cargoType;
 
-    @NotBlank(message = "Paid cannot be empty.")
+    @NotNull(message = "Paid cannot be empty.")
     private boolean isPaid;
 
     @PositiveOrZero(message = "Cost must not be negative number")
@@ -39,7 +38,7 @@ public class CreateRouteDto {
     @NotNull(message = "Route must be have at least one vehicle")
     private Vehicle vehicle;
 
-    @NotNull(message = "Route must be have company")
+    @NotNull(message = "Route must have company")
     private Company company;
 
     @NotNull(message = "Route must be have at least one employee")
@@ -57,6 +56,21 @@ public class CreateRouteDto {
         this.isPaid = isPaid;
         this.cost = cost;
         this.weight = weight;
+        this.vehicle = vehicle;
+        this.company = company;
+        this.employee = employee;
+        this.client = client;
+    }
+
+    //without weight - in case we have clients
+    public CreateRouteDto(String startingPoint, String destination, LocalDate startDate, LocalDate deliveryDate, CargoType cargoType, boolean isPaid, BigDecimal cost, Vehicle vehicle, Company company, Employee employee, Client client) {
+        this.startingPoint = startingPoint;
+        this.destination = destination;
+        this.startDate = startDate;
+        this.deliveryDate = deliveryDate;
+        this.cargoType = cargoType;
+        this.isPaid = isPaid;
+        this.cost = cost;
         this.vehicle = vehicle;
         this.company = company;
         this.employee = employee;
