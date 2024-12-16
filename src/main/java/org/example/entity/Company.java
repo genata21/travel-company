@@ -44,9 +44,25 @@ public class Company extends BaseEntity {
         super(id, createdAt);
         this.name = name;
     }
-//name desc profit
 
-    public Company (String name, String description, BigDecimal profit){
+    public Company(long id, LocalDate createdAt, String name, BigDecimal profit) {
+        super(id, createdAt);
+        this.name = name;
+        this.profit = profit;
+    }
+    public Company(String name, String description, BigDecimal profit) {
+        this.name = name;
+        this.description = description;
+        this.profit = profit;
+    }
+    public Company(long id, LocalDate createdAt, BigDecimal profit, String description) {
+        super(id, createdAt);
+        this.description = description;
+        this.profit = profit;
+    }
+
+    public Company(long id, LocalDate createdAt, String name, String description, BigDecimal profit) {
+        super(id, createdAt);
         this.name = name;
         this.description = description;
         this.profit = profit;

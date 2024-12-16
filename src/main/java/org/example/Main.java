@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.configuration.SessionFactoryUtil;
+import  org.example.dao.CompanyDao;
 import org.example.dao.ClientDao;
 import org.example.dao.VehicleDao;
 import org.example.dto.Client.CreateClientDto;
@@ -25,7 +26,7 @@ public class Main {
 
         try {
             SessionFactoryUtil.getSessionFactory().openSession();
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             System.out.printf(e.getMessage());
         }
 
@@ -82,9 +83,8 @@ public class Main {
 //        ClientDao.hardDeleteClient(client);
         //END TESTING CLIENT
 
-        CreateCompanyDto newComp = new CreateCompanyDto("enigma", "hotels");
-        CreateCompanyDto newComp2 = new CreateCompanyDto("lidl", "foods", BigDecimal.ONE);
-
-        System.out.println(newComp);
+//        CreateCompanyDto newComp = new CreateCompanyDto("enigma", "hotels");
+//        CreateCompanyDto newComp2 = new CreateCompanyDto("lidl", "foods", BigDecimal.ONE);
+//        System.out.println(newComp);
     }
 }

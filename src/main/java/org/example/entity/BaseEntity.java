@@ -15,7 +15,6 @@ public class BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotEmpty(message = "Date cannot be empty.")
     @PastOrPresent(message = "Creation date can't be in the future")
     @Column(name = "created_at", nullable = false)
     private LocalDate createdAt;

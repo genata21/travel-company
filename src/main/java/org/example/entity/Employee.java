@@ -47,7 +47,25 @@ public class Employee extends BaseEntity {
         this.company = company;
     }
 
-    //Getters
+    public Employee(long id, LocalDate createdAt, Category category, BigDecimal salary, Company company) {
+        super(id, createdAt);
+        this.category = category;
+        this.salary = salary;
+        this.company = company;
+    }
+    public Employee(long id, LocalDate createdAt, String name, BigDecimal salary, Company company) {
+        super(id, createdAt);
+        this.name = name;
+        this.salary = salary;
+        this.company = company;
+    }
+    public Employee(long id, LocalDate createdAt, String name, Category category, Company company) {
+        super(id, createdAt);
+        this.name = name;
+        this.category = category;
+        this.company = company;
+    }
+
     public String getName() { return name; }
     public Category getCategory() { return category; }
     public Company getCompany() { return company; }

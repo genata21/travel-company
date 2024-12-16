@@ -16,6 +16,7 @@ public class CreateEmployeeDto {
     @NotNull(message = "Employee must have a category.")
     private Category category;
 
+    @NotNull(message = "Employee must have salary")
     @Positive(message = "Salary can't be zero or negative.")
     @Column(name = "salary", nullable = false)
     private BigDecimal salary;

@@ -26,8 +26,11 @@ public class Client extends BaseEntity {
     @OneToMany(mappedBy = "client")
     private Set<Route> routes;
 
-    //Constructors
     public Client() {
+    }
+
+    public Client(long id, LocalDate createdAt) {
+        super(id, createdAt);
     }
 
     public Client(long id, LocalDate createdAt, String name) {
@@ -36,7 +39,12 @@ public class Client extends BaseEntity {
         this.debt = BigDecimal.ZERO;
     }
 
-    //Getters
+    public Client(long id, LocalDate createdAt, String name, BigDecimal debt) {
+        super(id, createdAt);
+        this.name = name;
+        this.debt = debt;
+    }
+
     public String getName() { return name; }
     public BigDecimal getDebt() { return debt; }
     public Set<Route> getRoutes() { return routes; }
