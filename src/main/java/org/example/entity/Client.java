@@ -49,15 +49,12 @@ public class Client extends BaseEntity {
     public BigDecimal getDebt() { return debt; }
     public Set<Route> getRoutes() { return routes; }
 
-    //Setters
     public void setName(String name) {
         this.name = name;
     }
     public void setDebt(BigDecimal debt) {
         this.debt = debt;
     }
-
-    //Methods
 
     @Override
     public String toString() {

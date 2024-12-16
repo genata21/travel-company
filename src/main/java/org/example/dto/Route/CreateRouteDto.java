@@ -1,7 +1,13 @@
 package org.example.dto.Route;
-import jakarta.validation.constraints.Future;
-import jakarta.validation.constraints.FutureOrPresent;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import org.example.entity.Client;
+import org.example.entity.Company;
+import org.example.entity.Employee;
+import org.example.entity.Vehicle;
+import org.example.enums.CargoType;
+
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class CreateRouteDto {
@@ -17,11 +23,44 @@ public class CreateRouteDto {
     @Future(message = "Delivery date must be in the future.")
     private LocalDate deliveryDate;
 
-    public CreateRouteDto(String startingPoint, String destination, LocalDate startDate, LocalDate deliveryDate) {
+    @NotBlank(message = "Cargo type cannot be empty.")
+    @Enumerated(EnumType.STRING)
+    private CargoType cargoType;
+
+    @NotBlank(message = "Paid cannot be empty.")
+    private boolean isPaid;
+
+    @PositiveOrZero(message = "Cost must not be negative number")
+    private BigDecimal cost;
+
+    @PositiveOrZero(message = "Weight must not be negative number")
+    private BigDecimal weight;
+
+    @NotNull(message = "Route must be have at least one vehicle")
+    private Vehicle vehicle;
+
+    @NotNull(message = "Route must be have company")
+    private Company company;
+
+    @NotNull(message = "Route must be have at least one employee")
+    private Employee employee;
+
+    @NotNull(message = "Route must be have at least one client")
+    private Client client;
+
+    public CreateRouteDto(String startingPoint, String destination, LocalDate startDate, LocalDate deliveryDate, CargoType cargoType, boolean isPaid, BigDecimal cost, BigDecimal weight, Vehicle vehicle, Company company, Employee employee, Client client) {
         this.startingPoint = startingPoint;
         this.destination = destination;
         this.startDate = startDate;
         this.deliveryDate = deliveryDate;
+        this.cargoType = cargoType;
+        this.isPaid = isPaid;
+        this.cost = cost;
+        this.weight = weight;
+        this.vehicle = vehicle;
+        this.company = company;
+        this.employee = employee;
+        this.client = client;
     }
 
     public String getStartingPoint() {
@@ -56,6 +95,70 @@ public class CreateRouteDto {
         this.deliveryDate = deliveryDate;
     }
 
+    public CargoType getCargoType() {
+        return cargoType;
+    }
+
+    public void setCargoType(CargoType cargoType) {
+        this.cargoType = cargoType;
+    }
+
+    public boolean isPaid() {
+        return isPaid;
+    }
+
+    public void setPaid(boolean paid) {
+        isPaid = paid;
+    }
+
+    public BigDecimal getCost() {
+        return cost;
+    }
+
+    public void setCost(BigDecimal cost) {
+        this.cost = cost;
+    }
+
+    public BigDecimal getWeight() {
+        return weight;
+    }
+
+    public void setWeight(BigDecimal weight) {
+        this.weight = weight;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
     @Override
     public String toString() {
         return "CreateRouteDto{" +
@@ -63,6 +166,14 @@ public class CreateRouteDto {
                 ", destination ='" + destination + '\'' +
                 ", start date =" + startDate +
                 ", delivery date =" + deliveryDate +
+                ", cargo type =" + cargoType +
+                ", is it paid =" + isPaid +
+                ", cost =" + cost +
+                ", weight =" + weight +
+                ", vehicle =" + vehicle +
+                ", company =" + company +
+                ", employee =" + employee +
+                ", client(s) =" + client +
                 '}';
     }
 }
