@@ -47,6 +47,9 @@ public class CreateRouteDto {
     @NotNull(message = "Route must be have at least one client")
     private Client client;
 
+    public CreateRouteDto() {
+    }
+
     public CreateRouteDto(String startingPoint, String destination, LocalDate startDate, LocalDate deliveryDate, CargoType cargoType, boolean isPaid, BigDecimal cost, BigDecimal weight, Vehicle vehicle, Company company, Employee employee, Client client) {
         this.startingPoint = startingPoint;
         this.destination = destination;

@@ -3,10 +3,10 @@ package org.example.dao;
 import org.example.configuration.SessionFactoryUtil;
 import org.example.dto.Route.CreateRouteDto;
 import org.example.dto.Route.UpdateRouteDto;
-import org.example.dto.Vehicle.CreateVehicleDto;
 import org.example.entity.*;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.example.enums.CargoType;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -16,13 +16,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import java.io.*;
-import org.example.enums.CargoType;
 
 public class RouteDao {
 
     public static final String FILE_NAME = "transports.csv";
 
-    public static void CreateRoute(CreateRouteDto createRouteDto) {
+    public static void createRoute(CreateRouteDto createRouteDto) {
         try(Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
             Route route = new Route();
@@ -171,33 +170,29 @@ public class RouteDao {
         }
     }
 
-    public static void loadFromFile() {
+    public static void loadFromFile(String file) {
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("textNew.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = reader.readLine()) != null) {
 
                 String[] data = line.split(",");
 
-                Route route = new Route();
+                CreateRouteDto route = new CreateRouteDto();
 
-                route.setCreatedAt(LocalDate.parse(data[0]));
-                route.setCargoType(CargoType.valueOf(data[1].toUpperCase());
-                route.setCost(new BigDecimal(data[2]));
-                route.setDeliveryDate(LocalDate.parse(data[3]));
-                route.setDestination(data[4]);
-                route.setPaid(Boolean.parseBoolean(data[5]));
-                route.setStartDate(LocalDate.parse(data[6]));
-                route.setStartingPoint(data[7]);
-                route.setCost(new BigDecimal(data[8]));
+                route.setCargoType(CargoType.valueOf(data[0].trim().toUpperCase()));
+                route.setCost(new BigDecimal(data[1].trim()));
+                route.setDeliveryDate(LocalDate.parse(data[2].trim()));
+                route.setDestination(data[3]);
+                route.setPaid(Boolean.parseBoolean(data[4].trim()));
+                route.setStartDate(LocalDate.parse(data[5].trim()));
+                route.setStartingPoint(data[6]);
+                route.setWeight(new BigDecimal(data[7].trim()));
 
-
-
-
-                Client client = ClientDao.getClientById(Long.parseLong(data[9]));
-                Company company = CompanyDao.getCompanyById(Long.parseLong(data[10]));
-                Employee employee = EmployeeDao.getEmployeeById(Long.parseLong(data[11]));
-                Vehicle vehicle = VehicleDao.getVehicleById(Long.parseLong(data[12]));
+                Client client = ClientDao.getClientById(Long.parseLong(data[8].trim()));
+                Company company = CompanyDao.getCompanyById(Long.parseLong(data[9].trim()));
+                Employee employee = EmployeeDao.getEmployeeById(Long.parseLong(data[10].trim()));
+                Vehicle vehicle = VehicleDao.getVehicleById(Long.parseLong(data[11].trim()));
 
                 route.setVehicle(vehicle);
                 route.setCompany(company);
@@ -205,8 +200,8 @@ public class RouteDao {
                 route.setClient(client);
 
                 System.out.println(Arrays.toString(data));
-//                // Save the transport to the database
-//                transportDAO.save(transport);
+
+                createRoute(route);
             }
         } catch (IOException e) {
             e.printStackTrace();

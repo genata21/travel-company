@@ -82,51 +82,8 @@ public class Main {
 //        ClientDao.hardDeleteClient(client);
         //END TESTING CLIENT
 
-//        CreateCompanyDto newComp = new CreateCompanyDto("enigma", "hotels");
-//        CreateCompanyDto newComp2 = new CreateCompanyDto("lidl", "foods", BigDecimal.ONE);
-//        System.out.println(newComp);
-
-//        Company company1 = new Company(1, LocalDate.now(), "Enigma", "hotels", BigDecimal.valueOf(4));
-//        Vehicle vehicle1 = new Vehicle(1, LocalDate.now(), "VT 2108 KT", VehicleType.BUS, company1);
-//         Employee employee1 = new Employee(1, LocalDate.now(), "Evgeni", Category.BUS_DRIVER, BigDecimal.valueOf(3), company1);
-//         Client client1 = new Client(1, LocalDate.now(), "Petko", BigDecimal.valueOf(8));
-//        Route route1 = new Route(
-//                1,
-//                LocalDate.now(),
-//                "plovdiv",
-//                "sofia",
-//                LocalDate.now(),
-//                LocalDate.now(),
-//                CargoType.FUEL,
-//                false,
-//                BigDecimal.valueOf(1),
-//                BigDecimal.valueOf(2),
-//                vehicle1,
-//                company1,
-//                employee1,
-//                client1);
-//         CreateCompanyDto newComp = new CreateCompanyDto("Enigma", "hotels", BigDecimal.valueOf(3));
-//       CompanyDao.createCompany(newComp);
-//
-//       CreateVehicleDto newV = new CreateVehicleDto("VT 2108 KT",VehicleType.BUS,company1);
-//       VehicleDao.createVehicle(newV);
-//
-//        CreateEmployeeDto newE = new CreateEmployeeDto("Ivan", Category.BUS_DRIVER,BigDecimal.valueOf(1000),company1);
-//        EmployeeDao.createEmployee(newE);
-//
-//        CreateClientDto newCl = new CreateClientDto("Evgeni");
-//        ClientDao.createClient(newCl);
-
-
-//        RouteDao.CreateRoute(newR);
         //RouteDao.saveToFile("file1.txt");
-        RouteDao.loadFromFile();
+        //RouteDao.loadFromFile("textNew.txt");
 
-        //System.out.println("Current working directory: " + System.getProperty("user.dir"));
-
-//
-//        System.out.println("Client: " + client1);
-//        System.out.println("Route DTO: " + newR);
-//    }
     }
 }
