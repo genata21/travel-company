@@ -298,6 +298,7 @@ public Route(long id, LocalDate createdAt, String startingPoint, String destinat
         this.company = company;
         this.employee = employee;
     }
+
     //Getters
     public String getStartingPoint() { return startingPoint; }
     public String getDestination() { return destination; }
