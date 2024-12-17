@@ -12,6 +12,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -161,9 +162,13 @@ public class RouteDao {
         List<Route> allRoutes = RouteDao.getAllRoutes();
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
+            int routeNumber = 1;
             for (Route routes : allRoutes) {
-                writer.write(routes.toString());
+                writer.write("Route " + routeNumber + ":");
                 writer.newLine();
+                writer.write(routes.saveIntoFile());
+                writer.newLine();
+                routeNumber++;
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -171,6 +176,8 @@ public class RouteDao {
     }
 
     public static void loadFromFile(String file) {
+
+        List<CreateRouteDto> routes = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
@@ -199,8 +206,11 @@ public class RouteDao {
                 route.setEmployee(employee);
                 route.setClient(client);
 
-                System.out.println(Arrays.toString(data));
 
+                routes.add(route);
+                System.out.println(Arrays.toString(data));
+            }
+            for (CreateRouteDto route : routes) {
                 createRoute(route);
             }
         } catch (IOException e) {

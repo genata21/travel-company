@@ -371,4 +371,19 @@ public Route(long id, LocalDate createdAt, String startingPoint, String destinat
                 ", client=" + client +
                 '}';
     }
+
+    public String saveIntoFile() {
+        return " startingPoint = " + startingPoint +
+                ", destination = " + destination +
+                ", startDate = " + startDate +
+                ", deliveryDate = " + deliveryDate +
+                ", cargoType = " + cargoType +
+                ", isPaid = " + isPaid +
+                ", cost = " + cost +
+                ", weight = " + weight +
+                ", vehicle = " + vehicle +
+                ", company = " + company +
+                ", employee = " + employee +
+                ", client = " + client;
+    }
 }

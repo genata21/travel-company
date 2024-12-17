@@ -85,8 +85,8 @@ public class Vehicle extends BaseEntity {
     @Override
     public String toString() {
         return "Vehicle{" +
-                "vehicleType=" + vehicleType +
-                "plate=" + plate +
+                " vehicleType = " + vehicleType +
+                " plate = " + plate +
                 '}';
     }
 }

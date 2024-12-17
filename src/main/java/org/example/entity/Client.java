@@ -59,8 +59,8 @@ public class Client extends BaseEntity {
     @Override
     public String toString() {
         return "Client{" +
-                "name='" + name + '\'' +
-                ", debt=" + debt +
+                " name = " + name +
+                ", debt = " + debt +
                 '}';
     }
 }

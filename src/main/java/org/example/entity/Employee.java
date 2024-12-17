@@ -88,10 +88,10 @@ public class Employee extends BaseEntity {
     @Override
     public String toString() {
         return "Employee{" +
-                "name='" + name + '\'' +
-                ", category=" + category +
-                ", salary=" + salary +
-                ", company=" + company +
+                " name = " + name +
+                ", category = " + category +
+                ", salary = " + salary +
+                ", company = " + company +
                 '}';
     }
 }

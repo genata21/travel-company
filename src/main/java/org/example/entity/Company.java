@@ -93,9 +93,9 @@ public class Company extends BaseEntity {
     @Override
     public String toString() {
         return "Company{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", profit=" + profit +
+                " name = " + name +
+                ", description = " + description +
+                ", profit = " + profit +
                 '}';
     }
 }

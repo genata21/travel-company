@@ -82,7 +82,7 @@ public class Main {
 //        ClientDao.hardDeleteClient(client);
         //END TESTING CLIENT
 
-        //RouteDao.saveToFile("file1.txt");
+        RouteDao.saveToFile("file.txt");
         //RouteDao.loadFromFile("textNew.txt");
 
     }
