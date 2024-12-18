@@ -82,8 +82,37 @@ public class Main {
 //        ClientDao.hardDeleteClient(client);
         //END TESTING CLIENT
 
-        RouteDao.saveToFile("file.txt");
+        //RouteDao.saveToFile("file.txt");
         //RouteDao.loadFromFile("textNew.txt");
 
+//------------------------------------------------------------------------//
+
+        //total number of routes
+        //long totalRoutes = RouteDao.getTotalRoutes();
+        //System.out.println(totalRoutes);
+
+        //total revenue
+        //BigDecimal totalRevenue = RouteDao.getTotalRevenue();
+        //System.out.println(totalRevenue);
+
+        //count of routes by each driver (Employee)
+//        List<String> employeeRoutes = RouteDao.getRoutesByEmployee();
+//
+//        System.out.println("Routes by Employee:");
+//        for (String route : employeeRoutes) {
+//            System.out.println(route);
+//        }
+
+        //revenue by each driver (Employee)
+//        List<String> employeeRevenue = RouteDao.getRevenueByEmployee();
+//        for (String revenue : employeeRevenue) {
+//            System.out.println(revenue);
+//        }
+
+    // revenue for a specific period
+        //LocalDate startDate = LocalDate.of(2025,12,11);
+        //LocalDate endDate = LocalDate.of(2025,12,11);
+        //BigDecimal revenue = RouteDao.getRevenueForPeriod(startDate, endDate);
+        //System.out.println("Total revenue for the period: " + revenue);
     }
 }

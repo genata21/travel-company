@@ -158,6 +158,101 @@ public class RouteDao {
         return routes;
     }
 
+    //total number of routes
+    public static long getTotalRoutes() {
+        long totalRoutes = 0;
+        try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
+            Transaction transaction = session.beginTransaction();
+            totalRoutes = (long) session.createQuery(
+                            "SELECT COUNT(*) FROM route WHERE deletedAt IS NULL")
+                    .getSingleResult();
+            transaction.commit();
+        }
+        return totalRoutes;
+    }
+
+    // total revenue from all routes
+    public static BigDecimal getTotalRevenue() {
+        BigDecimal totalRevenue = BigDecimal.ZERO;
+        try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
+            Transaction transaction = session.beginTransaction();
+            totalRevenue = (BigDecimal) session.createQuery(
+                            "SELECT SUM(r.cost) FROM route r WHERE r.deletedAt IS NULL")
+                    .getSingleResult();
+            transaction.commit();
+        }
+        return totalRevenue;
+    }
+
+    // count of routes by each driver (Employee)
+    public static List<String> getRoutesByEmployee() {
+        List<String> employeeRoutes = new ArrayList<>();
+        try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
+            Transaction transaction = session.beginTransaction();
+
+            List<Object[]> results = session.createQuery(
+                            "SELECT e.name, SUM(r.cost) " +
+                                    "FROM route r " +
+                                    "JOIN r.employee e " +
+                                    "WHERE r.deletedAt IS NULL " +
+                                    "GROUP BY e.name", Object[].class)
+                    .getResultList();
+
+            for (Object[] result : results) {
+                String employeeName = (String) result[0];
+                Long routeCount = (Long) result[1];
+                employeeRoutes.add(employeeName + ": " + routeCount);
+            }
+            transaction.commit();
+        }
+        return employeeRoutes;
+    }
+
+    //revenue by each driver (Employee)
+    public static List<String> getRevenueByEmployee() {
+        List<String> employeeRevenueList = new ArrayList<>();
+
+        try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
+            Transaction transaction = session.beginTransaction();
+
+            List<Object[]> results = session.createQuery(
+                            "SELECT e.name, SUM(r.cost) " +
+                                    "FROM route r JOIN r.employee e " +
+                                    "WHERE r.deletedAt IS NULL " +
+                                    "GROUP BY e.name", Object[].class)
+                    .getResultList();
+
+            for (Object[] result : results) {
+                String employeeName = (String) result[0];
+                BigDecimal revenue = (BigDecimal) result[1];
+                employeeRevenueList.add(employeeName + ": " + revenue);
+            }
+
+            transaction.commit();
+        }
+        return employeeRevenueList;
+    }
+
+    // revenue for a specific period
+    public static BigDecimal getRevenueForPeriod(LocalDate startDate, LocalDate endDate) {
+        BigDecimal totalRevenue = BigDecimal.ZERO;
+        try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
+            Transaction transaction = session.beginTransaction();
+
+            totalRevenue = (BigDecimal) session.createQuery(
+                            "SELECT SUM(r.cost) FROM route r " +
+                                    "WHERE r.startDate >= :startDate " +
+                                    "AND r.deliveryDate <= :endDate " +
+                                    "AND r.deletedAt IS NULL")
+                    .setParameter("startDate", startDate)
+                    .setParameter("endDate", endDate)
+                    .getSingleResult();
+
+            transaction.commit();
+        }
+        return totalRevenue;
+    }
+
     public static void saveToFile(String filename) {
         List<Route> allRoutes = RouteDao.getAllRoutes();
 
